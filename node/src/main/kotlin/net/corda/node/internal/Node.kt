@@ -154,11 +154,11 @@ open class Node(configuration: NodeConfiguration,
         }
 
         private fun hasMinimumJavaVersion(): Boolean {
-            // when the ext.java8_minUpdateVersion gradle constant changes, so must this check
+            // when the ext.minJavaVersion gradle constant changes, so must this check
             val major = SystemUtils.JAVA_VERSION_FLOAT
             return try {
                 val update = SystemUtils.JAVA_VERSION.substringAfter("_").toLong()
-                major == 1.8F && update >= 171
+                major == 1.11F && update >= 2
             } catch (e: NumberFormatException) { // custom JDKs may not have the update version (e.g. 1.8.0-adoptopenjdk)
                 false
             }
