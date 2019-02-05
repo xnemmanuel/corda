@@ -30,7 +30,7 @@ Alter the versions you depend on in your Gradle file like so:
     ext.corda_release_version = '4.0'
     ext.corda_gradle_plugins_version = '4.0.38'
     ext.kotlin_version = '1.2.71'
-    ext.quasar_version = '0.7.10'
+    ext.quasar_version = '0.8.0'
 
 .. note:: You may wish to update your kotlinOptions to use language level 1.2, to benefit from the new features. Apps targeting Corda 4
    may not at this time use Kotlin 1.3, as it was released too late in the development cycle
