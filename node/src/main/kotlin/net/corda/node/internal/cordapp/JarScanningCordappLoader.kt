@@ -264,7 +264,7 @@ class JarScanningCordappLoader private constructor(private val cordappJarPaths: 
         }
         return whitelists.filter {
             it.javaClass.location == cordappJarPath.url && it.javaClass.name.startsWith(cordappJarPath.qualifiedNamePrefix)
-        } + DefaultWhitelist // Always add the DefaultWhitelist to the whitelist for an app.
+        }
     }
 
     private fun findSerializers(scanResult: RestrictedScanResult): List<SerializationCustomSerializer<*, *>> {
