@@ -1324,7 +1324,7 @@ class SerializationOutputTests(private val compression: CordaSerializationEncodi
         )
         factory2.register(net.corda.serialization.internal.amqp.custom.ContractAttachmentSerializer(factory2))
 
-        val obj = ContractAttachment(object : AbstractAttachment({ throw Exception() }) {
+        val obj = ContractAttachment(object : AbstractAttachment("test", { throw Exception() }) {
             override val id = SecureHash.zeroHash
         }, DummyContract.PROGRAM_ID)
 

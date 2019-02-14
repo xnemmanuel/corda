@@ -6,6 +6,7 @@ import net.corda.core.contracts.*
 import net.corda.core.crypto.*
 import net.corda.core.crypto.CompositeKey
 import net.corda.core.identity.Party
+import net.corda.core.internal.AbstractAttachment
 import net.corda.core.node.NotaryInfo
 import net.corda.testing.common.internal.testNetworkParameters
 import net.corda.testing.contracts.DummyContract
@@ -168,8 +169,9 @@ class TransactionTests {
         val inputs = listOf(StateAndRef(inState, StateRef(SecureHash.randomSHA256(), 0)))
         val outputs = listOf(outState)
         val commands = emptyList<CommandWithParties<CommandData>>()
-        val attachments = listOf(object : Attachment {
-            override fun open(): InputStream = AttachmentsClassLoaderTests::class.java.getResource("isolated-4.0.jar").openStream()
+        val attachments = listOf(object : AbstractAttachment("TestDSL", {
+            AttachmentsClassLoaderTests::class.java.getResource("isolated-4.0.jar").openStream().readBytes()
+        }) {
             @Suppress("OverridingDeprecatedMember")
             override val signers: List<Party> = emptyList()
             override val signerKeys: List<PublicKey> = emptyList()

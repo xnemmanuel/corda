@@ -227,7 +227,7 @@ object DefaultKryoCustomizer {
                 val context = kryo.serializationContext()!!
                 val attachmentStorage = context.serviceHub.attachments
 
-                val lazyAttachment = object : AbstractAttachment({
+                val lazyAttachment = object : AbstractAttachment(uploader, {
                     val attachment = attachmentStorage.openAttachment(attachmentHash)
                             ?: throw MissingAttachmentsException(listOf(attachmentHash))
                     attachment.open().readFully()
@@ -237,7 +237,7 @@ object DefaultKryoCustomizer {
 
                 return ContractAttachment.create(lazyAttachment, contract, additionalContracts, uploader, signers, version)
             } else {
-                val attachment = GeneratedAttachment(input.readBytesWithLength())
+                val attachment = GeneratedAttachment(input.readBytesWithLength(), "generated")
                 val contract = input.readString()
                 val additionalContracts = kryo.readClassAndObject(input) as Set<ContractClassName>
                 val uploader = input.readString()

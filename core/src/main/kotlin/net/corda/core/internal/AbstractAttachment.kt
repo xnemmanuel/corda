@@ -31,7 +31,7 @@ val TRUSTED_UPLOADERS = listOf(DEPLOYED_CORDAPP_UPLOADER, RPC_UPLOADER, "TestDSL
 fun isUploaderTrusted(uploader: String?): Boolean = uploader in TRUSTED_UPLOADERS
 
 @KeepForDJVM
-abstract class AbstractAttachment(dataLoader: () -> ByteArray) : Attachment {
+abstract class AbstractAttachment(val uploader: String?, dataLoader: () -> ByteArray) : Attachment {
     companion object {
         /**
          * Returns a function that knows how to load an attachment.

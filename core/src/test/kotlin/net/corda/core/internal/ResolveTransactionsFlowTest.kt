@@ -142,6 +142,7 @@ class ResolveTransactionsFlowTest {
         future.getOrThrow()
     }
 
+    // todo - use this to test
     @Test
     fun attachment() {
         fun makeJar(): InputStream {
@@ -155,7 +156,7 @@ class ResolveTransactionsFlowTest {
         }
         // TODO: this operation should not require an explicit transaction
         val id = megaCorpNode.transaction {
-            megaCorpNode.services.attachments.importAttachment(makeJar(), "test", null)
+            megaCorpNode.services.attachments.importAttachment(makeJar(), "TestDSL", null)
         }
         val stx2 = makeTransactions(withAttachment = id).second
         val p = TestFlow(stx2, megaCorp)
